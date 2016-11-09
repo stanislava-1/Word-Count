@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="mobile-web-app-capable" content="yes">
+	<title>Word Count</title>
+	<link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+	<h1>
+		Word Count
+	</h1>
+	<div class="content">
+		<div class="column text">
+			<form method="post" action="/">
+				<h2>What text do you want to analyse?</h2>
+				<div class="text-box-part">
+					<label><b>Enter text:</b></label><br>
+					<textarea class="text-box" name="text" rows="10"></textarea>
+				</div>
+				<div class="submit-part">
+					<input type="submit" value="Submit">
+				</div>
+			</form>
+			{% if text %}
+			<div class="submitted">
+				<h2>Analyzed text:</h2>
+				<p>{{text}}</p>
+			</div>
+			{% endif %}
+		</div>
+		{% if dictionary %}
+		<div class="column tab">
+			<div class="summary-middle">
+				<h2>Total number of words:</h2> <b>{{total_words}}</b>
+				<h2>Number of different words:</h2> <b>{{different_words}}</b>
+				<h2>Number of words that create 80% of the text:</h2> <b>{{most_common}}</b> ({{percentage}}% of all used words)
+			</div>
+			<h2>Word order by occurence:</h2>
+			<table class="order">
+			{% for word in ordered_list %}
+				<tr>
+					<td class="left-col">
+				{{word[0]}}
+					</td>
+					<td class="middle-col">
+				{{word[1]}} 
+					</td>
+					<td class="right-col">
+				{{word[2]}} %
+					</td>
+				</tr>					
+			{% endfor %}
+			</table>
+			<div class="submitted-mobile">
+				<h2>Analyzed text:</h2>
+				<p>{{text}}</p>
+			</div>
+		</div>
+		<div class="column summary">
+			<h2>Total number of words:</h2> <b>{{total_words}}</b>
+			<h2>Number of different words:</h2> <b>{{different_words}}</b>
+			<h2>Number of words that create 80% of the text:</h2> <b>{{most_common}}</b> ({{percentage}}% of all used words)
+		</div>
+		{% endif %}
+	
+	</div>
+</body>
+</html>
